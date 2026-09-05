@@ -32,7 +32,10 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": ["appimage", "deb", "rpm"],
+    "shortDescription": "Markdown editor",
+    "longDescription": "Local-first markdown editor",
+    "category": "Office",
     "fileAssociations": [
       {
         "ext": ["md", "markdown"],
