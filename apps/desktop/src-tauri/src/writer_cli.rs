@@ -162,17 +162,10 @@ fn launch_system(target: Option<&Path>) -> Result<(), LaunchError> {
 fn launch_system(target: Option<&Path>) -> Result<(), LaunchError> {
     use std::process::Command;
 
-    let program = std::env::var_os("WRITER_APP_PATH").unwrap_or_else(|| {
-        std::env::current_exe()
-            .map(std::ffi::OsString::from)
-            .unwrap_or_else(|_| {
-                if cfg!(target_os = "windows") {
-                    "writer.exe".into()
-                } else {
-                    "desktop".into()
-                }
-            })
-    });
+    let program = std::env::var_os("WRITER_APP_PATH")
+        .filter(|p| !p.is_empty())
+        .or_else(|| std::env::current_exe().ok().map(std::ffi::OsString::from))
+        .unwrap_or_else(|| "desktop".into());
 
     let mut cmd = Command::new(&program);
     cmd.env("WRITER_FORCE_GUI", "1");
