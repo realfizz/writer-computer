@@ -8,7 +8,7 @@ mod ignore;
 mod macos;
 pub mod open_target;
 mod state;
-#[cfg(desktop)]
+#[cfg(all(desktop, target_os = "macos"))]
 mod updater;
 mod watcher;
 pub mod writer_cli;
@@ -18,10 +18,11 @@ use error::AppError;
 use open_target::resolve_path;
 pub use open_target::PendingOpenPayload;
 use state::AppState;
-use std::path::{Path, PathBuf};
 #[cfg(target_os = "macos")]
-use tauri::menu::MenuItem;
-use tauri::menu::{MenuBuilder, MenuItemBuilder, PredefinedMenuItem, SubmenuBuilder};
+use std::path::Path;
+use std::path::PathBuf;
+#[cfg(target_os = "macos")]
+use tauri::menu::{MenuBuilder, MenuItem, MenuItemBuilder, PredefinedMenuItem, SubmenuBuilder};
 #[cfg(target_os = "macos")]
 use tauri::RunEvent;
 use tauri::{DragDropEvent, Emitter, Manager, PhysicalPosition, WebviewWindow, WindowEvent};
@@ -252,10 +253,8 @@ fn position_new_window(app: &tauri::AppHandle, window: &WebviewWindow) {
     let _ = window.set_position(PhysicalPosition::new(x, y));
 }
 
-/// Build the native menu bar and wire updater menu events. macOS only needs a
-/// menu at all because of the auto-updater; the rest of the items are standard
-/// predefined actions so nothing has to be rewired on the frontend.
-#[cfg(desktop)]
+/// Build the native menu bar and wire updater menu events.
+#[cfg(all(desktop, target_os = "macos"))]
 fn install_app_menu(
     app: &tauri::AppHandle,
     app_data_dir: PathBuf,
@@ -341,6 +340,7 @@ fn install_app_menu(
 /// from `is_focused`): the main window if visible, else any visible window.
 /// `webview_windows()` returns a `HashMap` whose iteration order is
 /// non-deterministic, so the explicit main-window preference matters.
+#[cfg(target_os = "macos")]
 fn emit_to_focused_window(app: &tauri::AppHandle, event: &str) {
     let windows = app.webview_windows();
     let target = windows
@@ -509,7 +509,7 @@ pub fn run() {
                 }
             }
 
-            #[cfg(desktop)]
+            #[cfg(all(desktop, target_os = "macos"))]
             {
                 let config_dir = app
                     .path()
@@ -518,11 +518,8 @@ pub fn run() {
                 app.handle()
                     .plugin(tauri_plugin_updater::Builder::new().build())?;
                 install_app_menu(app.handle(), config_dir)?;
-                #[cfg(target_os = "macos")]
                 dock_menu::install(app.handle());
 
-                // Kick off the launch check once the window is ready to show
-                // any follow-up dialogs on top of a visible app.
                 let handle = app.handle().clone();
                 tauri::async_runtime::spawn(async move {
                     tokio::time::sleep(std::time::Duration::from_secs(2)).await;

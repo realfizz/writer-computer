@@ -1,6 +1,7 @@
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Search01Icon } from "@hugeicons/core-free-icons";
 import { useOpenCommandPalette } from "@/hooks/use-command-palette";
+import { modifierShortcut } from "@/lib/platform";
 import { useBooleanSetting } from "@/hooks/use-settings";
 import { ScrollFade } from "@/components/scroll-fade";
 import { SidebarNavigator } from "./sidebar-navigator";
@@ -45,7 +46,7 @@ export function FileBrowser({
             </span>
             Search
             <kbd className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-[11px] text-current">
-              ⌘<span className="ml-0.5">P</span>
+              {modifierShortcut("P")}
             </kbd>
           </button>
         </div>

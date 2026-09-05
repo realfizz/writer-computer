@@ -18,7 +18,7 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = ["protocol-asset", "macos-private-api"] }
+tauri = { version = "2", features = ["protocol-asset"] }
 tauri-plugin-opener = "2"
 tauri-plugin-dialog = "2"
 tauri-plugin-clipboard-manager = "2"
@@ -35,12 +35,12 @@ thiserror = "2"
 trash = "5"
 base64 = "0.22"
 tauri-plugin-store = "2.4.2"
-tauri-plugin-updater = "2"
 tauri-plugin-single-instance = "2"
 tauri-plugin-webdriver = { version = "0.2", optional = true }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 objc2 = "0.6.4"
+tauri-plugin-updater = "2"
 
 [features]
 # Embeds a W3C WebDriver server in the app for local E2E testing with

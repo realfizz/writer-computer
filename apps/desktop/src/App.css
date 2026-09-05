@@ -42,7 +42,7 @@
   --mono-font:
     ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
     monospace;
-  --bg-opacity: 0.715;
+  --bg-opacity: 0.88;
   --contrast: 0.328;
 
   /* Derived background — applied once on body. Editor and settings pages
@@ -101,6 +101,7 @@
 
   --chrome-control-height: 32px;
   --chrome-control-padding: 12px;
+  --chrome-leading-inset: 12px;
   --chrome-drag-height: 72px;
   --writer-editor-max-width: 734px;
   --writer-editor-side-padding: clamp(1.5rem, 4vw, 4rem);
@@ -252,7 +253,7 @@ body.tree-dragging [data-tree-path] {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: color-mix(in srgb, var(--bg-base) 55%, transparent);
+  background: color-mix(in srgb, var(--bg-base) 92%, transparent);
   z-index: -1;
   pointer-events: none;
 }
@@ -300,8 +301,8 @@ body.tree-dragging [data-tree-path] {
   border-radius: inherit;
   background:
     linear-gradient(
-      color-mix(in srgb, var(--bg-base) 55%, transparent),
-      color-mix(in srgb, var(--bg-base) 55%, transparent)
+      color-mix(in srgb, var(--bg-base) 92%, transparent),
+      color-mix(in srgb, var(--bg-base) 92%, transparent)
     ),
     var(--surface-card);
   backdrop-filter: blur(16px);
@@ -385,7 +386,7 @@ body.tree-dragging [data-tree-path] {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: color-mix(in srgb, var(--bg-base) 70%, transparent);
+  background: color-mix(in srgb, var(--bg-base) 92%, transparent);
   z-index: -1;
   pointer-events: none;
 }

@@ -127,7 +127,8 @@ function WorkspaceLayout({ showWelcome }: { showWelcome: boolean }) {
         className="pointer-events-none absolute left-0 top-0 z-50 flex items-center"
         style={{
           height: "calc(var(--chrome-control-height) + var(--chrome-control-padding) * 2)",
-          padding: "var(--chrome-control-padding) 12px var(--chrome-control-padding) 92px",
+          padding:
+            "var(--chrome-control-padding) 12px var(--chrome-control-padding) var(--chrome-leading-inset)",
         }}
       >
         <SidebarToggleButton />

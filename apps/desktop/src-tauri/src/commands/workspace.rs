@@ -120,8 +120,12 @@ fn terminal_launch_specs(
                 programs.push(program.to_string());
             }
             for fallback in [
-                "x-terminal-emulator",
+                "xdg-terminal-exec",
+                "foot",
+                "kitty",
+                "alacritty",
                 "ghostty",
+                "x-terminal-emulator",
                 "gnome-terminal",
                 "konsole",
                 "xfce4-terminal",
@@ -997,6 +1001,10 @@ mod tests {
                 .collect::<Vec<_>>(),
             [
                 "ghostty",
+                "xdg-terminal-exec",
+                "foot",
+                "kitty",
+                "alacritty",
                 "x-terminal-emulator",
                 "gnome-terminal",
                 "konsole",
@@ -1017,8 +1025,12 @@ mod tests {
                 .map(|spec| spec.program.as_str())
                 .collect::<Vec<_>>(),
             [
-                "x-terminal-emulator",
+                "xdg-terminal-exec",
+                "foot",
+                "kitty",
+                "alacritty",
                 "ghostty",
+                "x-terminal-emulator",
                 "gnome-terminal",
                 "konsole",
                 "xfce4-terminal"

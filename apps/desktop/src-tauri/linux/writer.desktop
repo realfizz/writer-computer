@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Writer
+Comment=Local-first markdown editor
+Exec=writer %F
+TryExec=writer
+Icon=writer
+Terminal=false
+Categories=Office;TextEditor;
+MimeType=text/markdown;text/x-markdown;
+StartupWMClass=Writer
+Keywords=markdown;notes;editor;

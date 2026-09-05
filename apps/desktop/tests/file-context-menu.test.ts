@@ -16,6 +16,7 @@ import {
   type FileContextMenuHandlers,
   type Platform,
 } from "../src/components/sidebar/file-context-menu";
+import { modifierShortcut } from "../src/lib/platform";
 
 function makeHandlers(): FileContextMenuHandlers & { calls: string[] } {
   const calls: string[] = [];
@@ -92,6 +93,13 @@ describe("detectPlatform", () => {
     // @ts-expect-error - intentionally remove navigator for the test
     delete globalThis.navigator;
     expect(detectPlatform()).toBe("linux");
+  });
+});
+
+describe("modifierShortcut", () => {
+  test("prefixes with Ctrl+", () => {
+    expect(modifierShortcut("N")).toBe("Ctrl+N");
+    expect(modifierShortcut("P")).toBe("Ctrl+P");
   });
 });
 

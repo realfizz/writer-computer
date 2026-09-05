@@ -3,6 +3,7 @@ import { useUIStore } from "@/stores/ui-store";
 import { useEditorStore } from "@/stores/editor-store";
 import { useWorkspaceStore } from "@/stores/workspace-store";
 import { toggleSidebar } from "@/hooks/use-sidebar";
+import { openPreferences } from "@/hooks/use-menu-events";
 import { getWorkspaceChromeMode } from "@/lib/compact-mode";
 
 function isEditableTargetFocused(): boolean {
@@ -44,6 +45,12 @@ export function useKeyboardShortcuts() {
       if (e.altKey && !e.shiftKey && e.key === "ArrowRight" && !isEditableTargetFocused()) {
         e.preventDefault();
         void navigateForward();
+        return;
+      }
+
+      if (mod && e.key === ",") {
+        e.preventDefault();
+        openPreferences();
         return;
       }
 

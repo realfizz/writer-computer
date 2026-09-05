@@ -32,7 +32,7 @@ function resolveMode(preference: ThemePreference): ThemeMode {
 const DERIVED_PRIMARIES: Partial<Record<PrimarySuffix, (v: unknown) => [string, string]>> = {
   translucent: (v) => {
     const t = clamp(Number(v) || 0, 0, 100);
-    return ["--bg-opacity", String(1 - (t / 100) * 0.95)];
+    return ["--bg-opacity", String(1 - (t / 100) * 0.25)];
   },
   contrast: (v) => {
     // Slider 0-100 maps to effective 0.2-1.0

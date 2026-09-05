@@ -1,14 +1,14 @@
-// Prevents additional console window on Windows in release, DO NOT REMOVE!!
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use std::path::Path;
 use std::process::ExitCode;
 
-/// Multi-call dispatch: a symlink named `writer` in the user's PATH points
-/// at the Writer app binary. When invoked through that symlink, argv[0]'s
-/// basename is `writer` and we run the CLI. Invoked as `Writer` (the usual
-/// case, direct from the bundle), we run the Tauri app.
 fn main() -> ExitCode {
+    if std::env::var_os("WEBKIT_DISABLE_DMABUF_RENDERER").is_none() {
+        unsafe {
+            std::env::set_var("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+        }
+    }
     if is_cli_invocation() {
         let argv: Vec<_> = std::env::args_os().collect();
         let cwd = std::env::current_dir().unwrap_or_else(|_| Path::new(".").into());
@@ -19,6 +19,9 @@ fn main() -> ExitCode {
 }
 
 fn is_cli_invocation() -> bool {
+    if std::env::var_os("WRITER_FORCE_GUI").is_some() {
+        return false;
+    }
     let Some(arg0) = std::env::args_os().next() else {
         return false;
     };

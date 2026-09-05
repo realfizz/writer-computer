@@ -28,8 +28,7 @@ Options:
   -V, --version     Print version and exit.
 
 Environment:
-  WRITER_APP_PATH   Override the path to the Writer bundle (macOS) or
-                    binary (Linux/Windows). Useful for development builds.
+  WRITER_APP_PATH   Override the GUI binary path.
 ";
 
 /// Version embedded at compile time from the Cargo package.
@@ -164,14 +163,19 @@ fn launch_system(target: Option<&Path>) -> Result<(), LaunchError> {
     use std::process::Command;
 
     let program = std::env::var_os("WRITER_APP_PATH").unwrap_or_else(|| {
-        if cfg!(target_os = "windows") {
-            "writer.exe".into()
-        } else {
-            "writer-desktop".into()
-        }
+        std::env::current_exe()
+            .map(std::ffi::OsString::from)
+            .unwrap_or_else(|_| {
+                if cfg!(target_os = "windows") {
+                    "writer.exe".into()
+                } else {
+                    "desktop".into()
+                }
+            })
     });
 
     let mut cmd = Command::new(&program);
+    cmd.env("WRITER_FORCE_GUI", "1");
     if let Some(path) = target {
         cmd.arg(path);
     }

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-09-05
+
+- Linux desktop: opaque window, `writer` CLI, Ctrl shortcuts, foot/kitty/alacritty terminal fallbacks.
+
 ## 2026-08-26
 
 - Add a **Content Width** slider under Preferences → Editor (480–1600px, default 734px) so the width of the text column is adjustable instead of a fixed Full/Narrow choice. The column never exceeds the pane, so the top of the range behaves as full width on a laptop. The frontmatter panel now shares the same width as the text column. An existing Editor Width preference migrates automatically (`narrow` → 720px, `full` → 1600px); the default changes from full width to a 734px reading column — drag the slider up if you preferred the wide layout.

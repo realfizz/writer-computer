@@ -1,4 +1,5 @@
 import { useOpenCommandPalette } from "@/hooks/use-command-palette";
+import { modifierShortcut } from "@/lib/platform";
 
 function Shortcut({ children }: { children: string }) {
   return (
@@ -18,7 +19,7 @@ export function NewTabPage() {
           className="flex items-center gap-1.5 text-[13px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
         >
           Create new note
-          <Shortcut>⌘N</Shortcut>
+          <Shortcut>{modifierShortcut("N")}</Shortcut>
         </button>
 
         <button
@@ -27,7 +28,7 @@ export function NewTabPage() {
           className="flex items-center gap-1.5 text-[13px] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
         >
           Search
-          <Shortcut>⌘O</Shortcut>
+          <Shortcut>{modifierShortcut("O")}</Shortcut>
         </button>
       </div>
     </div>
