@@ -35,7 +35,7 @@
     "targets": ["appimage", "deb", "rpm"],
     "shortDescription": "Markdown editor",
     "longDescription": "Local-first markdown editor",
-    "category": "Office",
+    "category": "Productivity",
     "fileAssociations": [
       {
         "ext": ["md", "markdown"],
